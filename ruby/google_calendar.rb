@@ -1,5 +1,6 @@
 require 'google/api_client'
 require 'google/api_client/client_secrets'
+require 'active_support/core_ext'
 require 'json'
 
 client = Google::APIClient.new(
@@ -18,14 +19,13 @@ year = 2014
 month = 5
 day = 28
 
-time_min = Time.utc(year, month, 1, 0).iso8601
-time_max = Time.utc(year, month, 31, 0).iso8601
+p client.execute(
+  api_method: calendar.calendar_list.list,
+  parameters: {
+    calendarId: 'ryopeko@gmail.com'
+  }
+).data
 
-params = {'calendarId' => 'primary',
-          'orderBy' => 'startTime',
-          'timeMax' => time_max,
-          'timeMin' => time_min,
-          'singleEvents' => 'True'}
 
 my_calendar = client.execute(
   api_method: calendar.calendars.get,
@@ -45,10 +45,10 @@ p client.execute(
   body: {
     email: 'ryopeko@gmail.com',
     start: {
-      dateTime: Time.utc(year, month, day, 18).iso8601.tap{|s| p s}
+      dateTime: Time.new(year, month, day, 18).iso8601
     },
     end: {
-      dateTime: Time.utc(year, month, day, 19).iso8601
+      dateTime: Time.new(year, month, day, 19).iso8601
     },
     summary: 'test event'
   }.to_json
@@ -56,6 +56,8 @@ p client.execute(
 
 p client.execute(
   api_method: calendar.events.list,
-  parameters: params
+  parameters: {
+    calendarId: 'primary',
+  }
 ).data
 
