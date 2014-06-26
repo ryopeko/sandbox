@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    redirect_to sessions_new_path unless signed_in?
+    redirect_to signin_path unless signed_in?
   end
 end
