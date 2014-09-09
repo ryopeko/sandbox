@@ -1,7 +1,7 @@
 module Books
   class API < Grape::API
     format :json
-    version 'v1'
+    version 'v1', using: :path
 
     resource :books do
       desc 'get'
