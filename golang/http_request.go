@@ -2,15 +2,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/PuerkitoBio/goquery"
 )
 
 func main() {
-	res, err := http.Get("http://example.com/")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println(res)
+	response, _ := goquery.NewDocument("http://example.com/")
+	response.Find("a").Each(func(_ int, s *goquery.Selection) {
+		url, _ := s.Attr("href")
+		fmt.Println(url)
+	})
 }
