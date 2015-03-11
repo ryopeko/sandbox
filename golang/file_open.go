@@ -2,16 +2,21 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
+	"bufio"
 )
 
 func main() {
-	lines, err := ioutil.ReadFile("hoge.csv")
+	file, err := os.Open("hoge.csv")
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Println(string(lines))
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
 }
