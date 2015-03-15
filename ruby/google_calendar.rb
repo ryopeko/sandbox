@@ -1,7 +1,10 @@
 require 'google/api_client'
 require 'google/api_client/client_secrets'
+require 'active_support'
 require 'active_support/core_ext'
+require 'awesome_print'
 require 'json'
+require 'pry'
 
 client = Google::APIClient.new(
   application_name: 'pekobot',
@@ -19,15 +22,15 @@ year = 2014
 month = 5
 day = 28
 
-p client.execute(
+ap client.execute(
   api_method: calendar.calendar_list.list,
   parameters: {
     calendarId: 'ryopeko@gmail.com'
   }
-).data
+).data.items
 
 
-my_calendar = client.execute(
+ap my_calendar = client.execute(
   api_method: calendar.calendars.get,
   parameters: {
     calendarId: 'ryopeko@gmail.com'
@@ -54,10 +57,14 @@ p client.execute(
   }.to_json
 ).data
 
-p client.execute(
+schedules = client.execute(
   api_method: calendar.events.list,
   parameters: {
     calendarId: 'primary',
+    timeMin: Time.now.iso8601,
+    timeMax: 1.week.since.iso8601,
   }
 ).data
+
+binding.pry
 
