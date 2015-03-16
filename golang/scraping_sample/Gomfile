@@ -1,0 +1,4 @@
+gom 'code.google.com/p/cascadia'
+gom 'github.com/PuerkitoBio/goquery'
+gom 'golang.org/x/net/html'
+gom 'golang.org/x/net/html/atom'
