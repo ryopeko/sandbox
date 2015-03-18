@@ -6,7 +6,8 @@ import (
 )
 
 func main() {
-	response, _ := goquery.NewDocument("http://example.com/")
+	response, _ := goquery.NewDocument("http://b.hatena.ne.jp/entrylist")
+
 	response.Find("a").Each(func(_ int, s *goquery.Selection) {
 		url, _ := s.Attr("href")
 		fmt.Println(url)
