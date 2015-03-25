@@ -11,4 +11,6 @@ type Foo struct {
 func main() {
 	s := &Foo{name: "bar"}
 	fmt.Println(s.name)
+	s.name = "baz"
+	fmt.Println(s.name)
 }
