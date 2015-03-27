@@ -8,9 +8,15 @@ type Foo struct {
 	name string
 }
 
+type Bar struct {
+	Foo
+	age int
+}
+
 func main() {
-	s := &Foo{name: "bar"}
-	fmt.Println(s.name)
-	s.name = "baz"
-	fmt.Println(s.name)
+	foo := &Foo{name: "foo_name"}
+	fmt.Println(foo.name)
+
+	bar := &Bar{Foo: Foo{name: "bar_name"}, age: 22}
+	fmt.Println(bar.name)
 }
