@@ -21,6 +21,7 @@ func main() {
 	for {
 		msg, doing := <-receive
 
+		fmt.Println(doing)
 		if !doing {
 			return
 		}
