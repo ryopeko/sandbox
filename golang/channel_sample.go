@@ -22,10 +22,11 @@ func main() {
 		msg, doing := <-receive
 
 		fmt.Println(doing)
-		if !doing {
+		switch {
+		case doing:
+			fmt.Println(msg)
+		case !doing:
 			return
 		}
-
-		fmt.Println(msg)
 	}
 }
