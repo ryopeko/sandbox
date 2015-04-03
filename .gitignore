@@ -1,5 +1,5 @@
 .DS_Store
 *~
 secret.json
-Godeps/Readme
-Godeps/_workspace
+**/Godeps/Readme
+**/Godeps/_workspace
