@@ -10,14 +10,19 @@ import (
 )
 
 func main() {
-	config_file, _ := ioutil.ReadFile("CREDENTIALS")
+	config_file, err := ioutil.ReadFile("CREDENTIALS")
+
+	if err != nil {
+		return
+	}
 	lines := strings.Split(string(config_file), "\n")
 
 	config := &oauth1a.ClientConfig{
 		ConsumerKey: lines[0],
-		ConsumerSecret: lines[1]
+		ConsumerSecret: lines[1],
 	}
-	user := &oauth1a.NewAuthorizedConfig(lines[2], lines[3])
-	client := twittergo.NewClient(config, user)
 
+	user := oauth1a.NewAuthorizedConfig(lines[2], lines[3])
+	client := twittergo.NewClient(config, user)
+	fmt.Println(client)
 }
