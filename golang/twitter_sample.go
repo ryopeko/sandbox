@@ -25,4 +25,5 @@ func main() {
 	user := oauth1a.NewAuthorizedConfig(lines[2], lines[3])
 	client := twittergo.NewClient(config, user)
 	fmt.Println(client)
+	fmt.Println(&twittergo.Timeline{})
 }
